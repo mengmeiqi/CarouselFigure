@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>轮播图_原生</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        li{
+            list-style:none;
+        }
+        img{
+            border:0;
+        }
+        #turns{
+            width:520px;
+            height:280px;
+            margin:100px auto;
+            position:relative;
+        }
+        #imgs img{
+            display:none;
+        }
+        #imgs .selected{
+            display:block;
+        }
+        #number{
+            width:120px;
+            height:20px;
+            position:absolute;
+            bottom:10px;
+            right:10px;
+        }
+        #direction{
+            position:absolute;
+            bottom:10px;
+            left:10px;
+        }
+        #number li,#direction div{
+            height:20px;
+            width:20px;
+            background: #000;
+            margin-right:10px;
+            float:left;
+            color:#fff;
+            text-align:center;
+            line-height:20px;
+            cursor:pointer;
+        }
+        #number .selected{
+            background:orange;
+        }
+    </style>
+</head>
+<body>
+    <div id="turns">
+        <div id="imgs">
+            <img class="selected" src="img/1.jpg" alt=""/>
+            <img src="img/2.jpg" alt=""/>
+            <img src="img/3.jpg" alt=""/>
+            <img src="img/4.jpg" alt=""/>
+        </div>
+        <ul id="number">
+            <li class="selected">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+        <div id="direction">
+            <div id="left">&lt</div>
+            <div id="right">&gt</div>
+        </div>
+    </div>
+    <script>
+        var oTurns = document.getElementById("turns");
+        var oImgs = document.getElementById("imgs");
+        var aImgs = oImgs.getElementsByTagName("img");
+        var oNumber = document.getElementById("number");
+        var aLi = oNumber.getElementsByTagName("li");
+        var oLeft = document.getElementById("left");
+        var oRight = document.getElementById("right");
+        var nowIndex = 0;
+        var timer;
+        function changeImg(){
+            for(var i=0;i<aLi.length;i++){
+                aLi[i].className = "";
+                aImgs[i].className = "";
+            }
+            aLi[nowIndex].className = "selected";
+            aImgs[nowIndex].className = "selected";
+        }
+
+        for(var i=0;i<aLi.length;i++){
+            aLi[i].index = i;
+            aLi[i].onclick = function(){
+                nowIndex = this.index;
+                changeImg();
+            }
+         }
+
+        oLeft.onclick = oRight.onclick = function(){
+            if(this == oLeft){
+                nowIndex--;
+                if(nowIndex == -1){
+                    nowIndex = aLi.length-1;
+                }
+            }else{
+                nowIndex++;
+                if(nowIndex == aLi.length){
+                    nowIndex = 0;
+                }
+            }
+            changeImg();
+        };
+
+        oTurns.onmouseover = function(){
+            clearInterval(timer);
+        };
+
+        oTurns.onmouseout = function(){
+            play();
+        };
+
+        play();
+
+        function play(){
+            timer = setInterval(function(){
+                oRight.onclick();
+            },1000);
+        }
+    </script>
+</body>
+</html>

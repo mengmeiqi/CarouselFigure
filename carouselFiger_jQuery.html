@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>轮播图_jQuery</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        li{
+            list-style:none;
+        }
+        img{
+            border:0;
+        }
+        #turns{
+            width:520px;
+            height:280px;
+            margin:100px auto;
+            position:relative;
+        }
+        #imgs img{
+            display:none;
+        }
+        #imgs .selected{
+            display:block;
+        }
+        #number{
+            width:120px;
+            height:20px;
+            position:absolute;
+            bottom:10px;
+            right:10px;
+        }
+        #direction{
+            position:absolute;
+            bottom:10px;
+            left:10px;
+        }
+        #number li,#direction div{
+            height:20px;
+            width:20px;
+            background: #000;
+            margin-right:10px;
+            float:left;
+            color:#fff;
+            text-align:center;
+            line-height:20px;
+            cursor:pointer;
+        }
+        #number .selected{
+            background:orange;
+        }
+    </style>
+</head>
+<body>
+    <div id="turns">
+        <div id="imgs">
+            <img class="selected" src="img/1.jpg" alt=""/>
+            <img src="img/2.jpg" alt=""/>
+            <img src="img/3.jpg" alt=""/>
+            <img src="img/4.jpg" alt=""/>
+        </div>
+        <ul id="number">
+            <li class="selected">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+        <div id="direction">
+            <div id="left">&lt</div>
+            <div id="right">&gt</div>
+        </div>
+    </div>
+</body>
+</html>
